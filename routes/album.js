@@ -45,14 +45,18 @@ router.get("/update/:id", async (req, res, next) => {
 
 // POST - update one album
 
-router.post("/update/:id", async (req, res, next) => {
+router.post("/update/:id", uploader.single("cover"), async (req, res, next) => {
   try {
   const id = req.params.id;
+  console.log(id);
   console.log("thisistheconsolelogofREGBODY", req.body);
-  const updatedAlbum = await AlbumModel.findByIdAndUpdate(id, req.body, {
-    new: true
-  })
-  res.redirect("/dashboard/albums")
+  //
+  if (req.file) {
+    req.body.cover = req.file.path
+  }
+  const updatedAlbum = await AlbumModel.findByIdAndUpdate(id, req.body,
+   {new: true});
+  res.redirect("/dashboard/albums");
   }
   catch (err){
   next(err)
