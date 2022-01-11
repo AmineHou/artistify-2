@@ -1,9 +1,10 @@
 <form
   method="post"
-  action="/dashboard/album"
+  action="/dashboard/albums/update/{{albumOnDisplay._id}}"
   class="form"
   enctype="multipart/form-data"
 >
+<h1>{{this}}</h1>
   <h1 class="title">create album</h1>
   <label for="title" class="label">title</label>
   <input class="input" type="text" id="title" name="title" value="test album" />
@@ -39,5 +40,5 @@
   </label>
   <input class="is-hidden" type="file" id="cover" name="cover" />
 
-  <button class="btn">create</button>
+  <button class="btn">UPDATE</button>
 </form>

@@ -30,13 +30,34 @@ router.get("/create", async (req, res, next) => {
 });
 
 // GET - update one album (form)
-router.get("/update", async (req, res, next) => {
+router.get("/update/:id", async (req, res, next) => {
   try {
-    await res.render("dashboard/albumUpdate");
+    const id = req.params.id;
+    const albumOnDisplay = await AlbumModel.findById(id);
+    const artists = await ArtistModel.find();
+    const labels = await LabelModel.find();
+    console.log("this is the album we try to update", albumOnDisplay);
+    await res.render("dashboard/albumUpdate", {albumOnDisplay, artists, labels});
   } catch (err) {
     next(err);
   }
 });
+
+// POST - update one album
+
+router.post("/update/:id", async (req, res, next) => {
+  try {
+  const id = req.params.id;
+  console.log("thisistheconsolelogofREGBODY", req.body);
+  const updatedAlbum = await AlbumModel.findByIdAndUpdate(id, req.body, {
+    new: true
+  })
+  res.redirect("/dashboard/albums")
+  }
+  catch (err){
+  next(err)
+  }
+})
 
 // GET - delete one album
 router.get("/delete/:id", async (req, res, next) => {
@@ -63,6 +84,6 @@ router.post("/", uploader.single("cover"), async (req, res, next) => {
   }
 });
 
-// POST - update one album
+
 
 module.exports = router;
