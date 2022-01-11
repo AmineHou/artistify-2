@@ -1,27 +1,43 @@
-<form method="post" action="/dashboard/album" class="form" enctype="multipart/form-data">
-    <h1 class="title">create album</h1>
-    <label for="title" class="label">title</label>
-    <input class="input" type="text" id="title" name="title" value="test album">
+<form
+  method="post"
+  action="/dashboard/album"
+  class="form"
+  enctype="multipart/form-data"
+>
+  <h1 class="title">create album</h1>
+  <label for="title" class="label">title</label>
+  <input class="input" type="text" id="title" name="title" value="test album" />
 
-    <label for="select-artist">artist</label>
-    <select id="select-artist" name="artist" class="input">
-        {{!-- YOUR CODE HERE --}}
-    </select>
+  <label for="select-artist">artist</label>
+  <select id="select-artist" name="artist" class="input">
+    {{! YOUR CODE HERE }}
+    {{#each artists}}
+      <option value={{this.name}}>{{this.name}}</option>
+    {{/each}}
+  </select>
 
-    <label for="select-label">label</label>
-    <select id="select-label" name="label" class="input">
-        {{!-- YOUR CODE HERE --}}
-    </select>
+  <label for="select-label">label</label>
+  <select id="select-label" name="label" class="input">
+    {{! YOUR CODE HERE }}
+    {{#each labels}}
+      <option value={{this.name}}>{{this.name}}</option>
+    {{/each}}
+  </select>
 
-    <label for="releaseDate" class="label">release date</label>
-    <input class="input" type="date" id="releaseDate" name="releaseDate" value="2020-12-08">
+  <label for="releaseDate" class="label">release date</label>
+  <input
+    class="input"
+    type="date"
+    id="releaseDate"
+    name="releaseDate"
+    value="2020-12-08"
+  />
 
-    <label for="cover" class="label">
-        choose a cover
-        <i class="icon fas fa-cloud-upload-alt fa-2x"></i>
-    </label>
-    <input class="is-hidden" type="file" id="cover" name="cover">
+  <label for="cover" class="label">
+    choose a cover
+    <i class="icon fas fa-cloud-upload-alt fa-2x"></i>
+  </label>
+  <input class="is-hidden" type="file" id="cover" name="cover" />
 
-
-    <button class="btn">create</button>
+  <button class="btn">create</button>
 </form>
