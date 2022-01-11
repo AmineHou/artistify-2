@@ -35,7 +35,7 @@ router.get("/delete/:id", async (req, res, next) => {
   try {
     // use the model to delete one label by id
     await StyleModel.findByIdAndDelete(req.params.id);
-    res.redirect("/dashboard/style"); // then redirect to labels full list
+    res.redirect("/dashboard/styles"); // then redirect to labels full list
   } catch (err) {
     next(err);
   }
@@ -44,7 +44,7 @@ router.get("/delete/:id", async (req, res, next) => {
 router.post("/", async (req, res, next) => {
   try {
     await StyleModel.create(req.body);
-    res.redirect("/dashboard/style");
+    res.redirect("/dashboard/styles");
   } catch (err) {
     next(err); // express will display the error on the provided error page (error.hbs) (check the www file for details ....)
   }
@@ -53,7 +53,7 @@ router.post("/", async (req, res, next) => {
 router.post("/:id", async (req, res, next) => {
   try {
     await StyleModel.findByIdAndUpdate(req.params.id, req.body);
-    res.redirect("/dashboard/style");
+    res.redirect("/dashboard/styles");
   } catch (err) {
     next(err); // express will display the error on the provided error page (error.hbs) (check the www file for details ....)
   }

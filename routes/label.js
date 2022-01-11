@@ -25,7 +25,6 @@ router.get("/create", (req, res) => {
   res.render("dashboard/labelCreate");
 });
 
-
 // GET /dashboard/label/update/:id
 router.get("/update/:id", async (req, res, next) => {
   try {
@@ -41,7 +40,7 @@ router.get("/delete/:id", async (req, res, next) => {
   try {
     // use the model to delete one label by id
     await LabelModel.findByIdAndDelete(req.params.id);
-    res.redirect("/dashboard/label"); // then redirect to labels full list
+    res.redirect("/dashboard/labels"); // then redirect to labels full list
   } catch (err) {
     next(err);
   }
@@ -61,7 +60,7 @@ router.post("/create", uploader.single("logo"), async (req, res, next) => {
 
   try {
     await LabelModel.create(newLabel);
-    res.redirect("/dashboard/label");
+    res.redirect("/dashboard/labels");
   } catch (err) {
     next(err); // express will display the error on the provided error page (error.hbs) (check the www file for details ....)
   }
@@ -79,7 +78,7 @@ router.post("/:id", uploader.single("logo"), async (req, res, next) => {
     await LabelModel.findByIdAndUpdate(req.params.id, labelToUpdate, {
       new: true,
     });
-    res.redirect("/dashboard/label");
+    res.redirect("/dashboard/labels");
   } catch (err) {
     next(err);
   }

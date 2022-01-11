@@ -22,7 +22,6 @@ app.use(express.urlencoded({ extended: false })); // same for synchronous posted
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-
 // connect routers
 const indexRouter = require("./routes/index");
 const artistRouter = require("./routes/artist");
@@ -30,13 +29,12 @@ const albumRouter = require("./routes/album");
 const labelRouter = require("./routes/label");
 const styleRouter = require("./routes/style");
 
-
 // use routers
 app.use("/", indexRouter); // use routers
-app.use("/dashboard/artist", artistRouter); // use artist router
-app.use("/dashboard/album", albumRouter); // use album router
-app.use("/dashboard/label", labelRouter); // use label router
-app.use("/dashboard/style", styleRouter); // use style router
+app.use("/dashboard/artists", artistRouter); // use artist router
+app.use("/dashboard/albums", albumRouter); // use album router
+app.use("/dashboard/labels", labelRouter); // use label router
+app.use("/dashboard/styles", styleRouter); // use style router
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -55,4 +53,3 @@ app.use(function (err, req, res, next) {
 });
 
 module.exports = app;
-

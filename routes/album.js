@@ -26,12 +26,28 @@ router.get("/", async (req, res, next) => {
 router.get("/create", async (req, res, next) => {
   const artists = await ArtistModel.find();
   const labels = await LabelModel.find();
-  res.render("dashboard/albumCreate", { artists, labels });
+  await res.render("dashboard/albumCreate", { artists, labels });
 });
 
 // GET - update one album (form)
+router.get("/update", async (req, res, next) => {
+  try {
+    await res.render("dashboard/albumUpdate");
+  } catch (err) {
+    next(err);
+  }
+});
 
 // GET - delete one album
+router.get("/delete/:id", async (req, res, next) => {
+  try {
+    const id = req.params.id;
+    await AlbumModel.findByIdAndDelete(id);
+    await res.redirect("/dashboard/albums");
+  } catch (err) {
+    next(err);
+  }
+});
 
 // POST - create one album
 router.post("/", uploader.single("cover"), async (req, res, next) => {
@@ -41,7 +57,7 @@ router.post("/", uploader.single("cover"), async (req, res, next) => {
   console.log(newAlbum);
   try {
     await AlbumModel.create(newAlbum);
-    res.redirect("/dashboard/album");
+    res.redirect("/dashboard/albums");
   } catch (err) {
     next(err);
   }
