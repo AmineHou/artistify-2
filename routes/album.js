@@ -1,8 +1,8 @@
 const express = require("express");
 const router = new express.Router();
-const AlbumModel = require("./../model/Album");
 const ArtistModel = require("./../model/Artist");
 const LabelModel = require("./../model/Label");
+const AlbumModel = require("./../model/Album");
 const uploader = require("./../config/cloudinary");
 
 // router.use(protectAdminRoute);
@@ -10,9 +10,13 @@ const uploader = require("./../config/cloudinary");
 // GET - all albums
 router.get("/", async (req, res, next) => {
   try {
-    res.render("dashboard/albums", {
-      albums: await AlbumModel.find().populate("artist label"),
-    });
+    await AlbumModel.find()
+      .populate("artist label")
+      .then((albums) => {
+        console.log(albums);
+        res.render("dashboard/albums", { albums });
+      })
+      .catch((err) => console.error(err));
   } catch (err) {
     next(err);
   }

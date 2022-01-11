@@ -8,7 +8,7 @@ const styleSchema = new Schema(
       type: String,
       default: "#000",
     },
-    wikiURL: String
+    wikiURL: String,
   },
   { timestamps: true }
 );

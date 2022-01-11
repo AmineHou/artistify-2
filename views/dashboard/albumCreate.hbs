@@ -12,7 +12,7 @@
   <select id="select-artist" name="artist" class="input">
     {{! YOUR CODE HERE }}
     {{#each artists}}
-      <option value={{this.name}}>{{this.name}}</option>
+      <option value={{this._id}}>{{this.name}}</option>
     {{/each}}
   </select>
 
@@ -20,7 +20,7 @@
   <select id="select-label" name="label" class="input">
     {{! YOUR CODE HERE }}
     {{#each labels}}
-      <option value={{this.name}}>{{this.name}}</option>
+      <option value={{this._id}}>{{this.name}}</option>
     {{/each}}
   </select>
 
